@@ -1,9 +1,23 @@
-.DS_Store
-.vite-ssg-dist
-.vite-ssg-temp
-*.local
-dist
-dist-ssr
+# dependencies
 node_modules
-.idea/
+
+# build output
+dist
+.astro
+
+# print test output (PDFs/PNGs to eyeball; the reference lives in tests/__reference__)
+test-results
+playwright-report
+
+# env and local overrides
+.env
+.env.*
+!.env.example
+*.local
+
+# logs
 *.log
+
+# editor/OS
+.DS_Store
+.idea/

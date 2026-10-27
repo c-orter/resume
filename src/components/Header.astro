@@ -1,0 +1,108 @@
+---
+import { Icon } from 'astro-icon/components'
+import { name, title } from '../data/resume'
+import profile from '../assets/profile.jpg'
+import { Image } from 'astro:assets'
+import Button from './Button.astro'
+
+const icon = 'flex items-center text-[18px] leading-none'
+---
+
+<div class="w-full">
+  <section class="toolbar mb-[-62px] flex items-center print:hidden">
+    <div class="flex">
+      <Button id="print-button" aria-label="Print">
+        <Icon name="bi:printer-fill" class={`${icon} dark:text-white`} />
+      </Button>
+      <Button id="theme-button" aria-label="Toggle dark mode">
+        <Icon name="bi:sun-fill" class={`${icon} hidden text-white dark:flex`} />
+        <Icon name="bi:moon-fill" class={`${icon} dark:hidden`} />
+      </Button>
+      <Button href="https://github.com/CarterGrimmeisen/resume" aria-label="Source on GitHub">
+        <Icon name="bi:github" class={`${icon} dark:text-white`} />
+      </Button>
+    </div>
+  </section>
+
+  <div class="box">
+    <div class="person-info">
+      <h1 class="name text-[2em] leading-none font-extrabold tracking-[3px] uppercase dark:text-gray-200">{name}</h1>
+      <h2 class="position text-subtitle leading-[22px] font-extrabold tracking-[2px] text-blue-500 uppercase dark:text-blue-400">
+        {title}
+      </h2>
+    </div>
+    <div class="person-photo print:hidden">
+      <Image src={profile} alt={name} width={200} height={200} class="size-[100px] rounded-full" />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('print-button')?.addEventListener('click', () => window.print())
+  document.getElementById('theme-button')?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark')
+    try {
+      localStorage.setItem('vueuse-color-scheme', dark ? 'dark' : 'light')
+    } catch {}
+  })
+</script>
+
+<style>
+  .toolbar {
+    justify-content: start;
+  }
+  .person-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .name {
+    margin-bottom: 0.25em;
+  }
+  .position {
+    margin: 0;
+  }
+  .box {
+    padding: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  @media (max-width: 12.9cm) {
+    .toolbar {
+      align-items: flex-start;
+      margin-bottom: -185px;
+    }
+
+    .toolbar > div {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 21cm), print {
+    .toolbar {
+      justify-content: space-between !important;
+    }
+    .box {
+      padding-top: 20px;
+      flex-direction: column-reverse;
+    }
+    .person-info {
+      align-items: center;
+      justify-content: center;
+    }
+    .person-photo {
+      padding-bottom: 20px;
+    }
+    .name,
+    .position {
+      text-align: center;
+    }
+  }
+  @media print {
+    .box {
+      padding-top: 0;
+    }
+  }
+</style>

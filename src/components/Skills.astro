@@ -1,0 +1,14 @@
+---
+import { skills } from '../data/resume'
+import Headline from './Headline.astro'
+import Paragraph from './Paragraph.astro'
+import Title from './Title.astro'
+---
+
+<Title>Skills</Title>
+{skills.map((s) => (
+  <div class="mb-3">
+    <Headline>{s.category}</Headline>
+    <Paragraph set:html={s.items} />
+  </div>
+))}

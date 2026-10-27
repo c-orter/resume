@@ -1,0 +1,13 @@
+---
+const { href, class: className, ...rest } = Astro.props
+const Tag = href ? 'a' : 'div'
+---
+
+<Tag href={href} target={href ? '_blank' : undefined} class={className}>
+  <button
+    class="m-2.5 h-auto w-auto cursor-pointer border-none bg-transparent p-2.5 hover:bg-black/10 hover:transition-all hover:duration-500 hover:ease-out"
+    {...rest}
+  >
+    <slot />
+  </button>
+</Tag>

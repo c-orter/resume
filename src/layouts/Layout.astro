@@ -1,0 +1,29 @@
+---
+import '../styles/global.css'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carter Grimmeisen - Resume</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='1.05em' font-size='85'>🔵</text></svg>"
+    />
+    <script is:inline>
+      // Set the theme before first paint. Key kept from the old VueUse setup so saved preferences carry over.
+      ;(function () {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
+        if (setting === 'dark' || (prefersDark && setting !== 'light')) document.documentElement.classList.add('dark')
+      })()
+    </script>
+  </head>
+  <body class="m-0 bg-gray-300 font-sans dark:bg-gray-900 print:bg-transparent">
+    <div class="a4 mx-auto my-[1.5cm] block bg-gray-200 shadow-lg dark:bg-gray-700 print:bg-transparent print:shadow-none">
+      <slot />
+    </div>
+  </body>
+</html>

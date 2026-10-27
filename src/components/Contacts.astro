@@ -1,0 +1,17 @@
+---
+import { Icon } from 'astro-icon/components'
+import { contacts } from '../data/resume'
+import Title from './Title.astro'
+---
+
+<Title>Contact</Title>
+{contacts.map((c) => (
+  <div class:list={['items-center', c.printOnly ? 'hidden print:flex' : 'flex']}>
+    <Icon name={c.icon} class="size-[1.2em] dark:text-white" />
+    <p class="m-[0.25em] pl-[1em] leading-[22px] text-black underline hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 print:no-underline">
+      <a href={c.href} target={c.external ? '_blank' : undefined}>
+        {c.label}
+      </a>
+    </p>
+  </div>
+))}

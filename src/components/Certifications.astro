@@ -1,0 +1,20 @@
+---
+import { certifications } from '../data/resume'
+import Paragraph from './Paragraph.astro'
+import Title from './Title.astro'
+---
+
+<Title>Certifications</Title>
+{certifications.map((c) => (
+  <div class="flex items-center">
+    <svg
+      viewBox="0 0 8 8"
+      fill="currentColor"
+      class="mx-2 size-2 shrink-0 text-black dark:text-white"
+      aria-hidden="true"
+    >
+      <circle cx="4" cy="4" r="4" />
+    </svg>
+    <Paragraph class="m-[0.25em] pl-[1em]">{c}</Paragraph>
+  </div>
+))}

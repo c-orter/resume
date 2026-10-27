@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components'
+import { projects } from '../data/resume'
+import Headline from './Headline.astro'
+import Paragraph from './Paragraph.astro'
+import SubTitle from './SubTitle.astro'
+import Title from './Title.astro'
+---
+
+<Title>Projects</Title>
+{projects.map((p) => (
+  <section class="mb-[1em]">
+    <section class="flex items-center justify-between">
+      <SubTitle class="hover:text-blue-800 dark:hover:text-blue-300">
+        <a href={p.github} target="_blank" class="underline print:no-underline">
+          {p.name}
+        </a>
+      </SubTitle>
+      <SubTitle>
+        <a href={p.github} target="_blank" class="print:hidden">
+          <Icon name="bi:github" class="ml-1 size-[1.2em] text-black dark:text-white" />
+        </a>
+        <a href={p.npm} target="_blank" class="ml-1 print:hidden">
+          <Icon name="simple-icons:npm" class="ml-1 size-[1.2em] text-black dark:text-white" />
+        </a>
+        <span class="hidden text-paragraph font-normal tracking-normal text-black normal-case print:block">
+          {p.npm}
+        </span>
+      </SubTitle>
+    </section>
+
+    <Headline>Made with {p.technologies}</Headline>
+    <Paragraph set:html={p.description} />
+  </section>
+))}

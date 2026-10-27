@@ -1,0 +1,7 @@
+---
+const { class: className } = Astro.props
+---
+
+<p class:list={['text-paragraph leading-[22px] text-gray-800 dark:text-gray-300', className]}>
+  <slot />
+</p>

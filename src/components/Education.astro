@@ -1,0 +1,18 @@
+---
+import { education } from '../data/resume'
+import Headline from './Headline.astro'
+import Paragraph from './Paragraph.astro'
+import Title from './Title.astro'
+---
+
+<Title>Education</Title>
+{education.map((e) => (
+  <section class="mb-[1em] last:mb-0">
+    <Headline>{e.degree}</Headline>
+    <Paragraph>
+      {e.completed && `${e.completed} - `}
+      {e.gpa} GPA
+    </Paragraph>
+    <Paragraph>{e.institution}</Paragraph>
+  </section>
+))}

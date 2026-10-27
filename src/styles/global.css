@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/800.css';
+
+/* `dark:` follows the `.dark` class on <html>, but never applies in print so
+   printouts are always light, however the print was triggered. */
+@custom-variant dark {
+  @media not print {
+    &:where(.dark, .dark *) {
+      @slot;
+    }
+  }
+}
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --text-paragraph: 15px;
+  --text-subtitle: 14px;
+  --text-title: 18px;
+  --text-headline: 14px;
+
+  /* Tailwind v2 palette (what WindiCSS used); v4's defaults are noticeably brighter. */
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-800: #1e40af;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.a4 {
+  width: 25cm;
+}
+
+@media (max-width: 25cm) {
+  .a4 {
+    width: auto !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+}
+
+@media print {
+  .a4 {
+    margin: 0 !important;
+    width: 25cm !important;
+    box-shadow: none !important;
+  }
+}
