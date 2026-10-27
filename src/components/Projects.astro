@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { projects } from '../data/resume'
+import { projects } from '../data/resume.yaml'
 import Headline from './Headline.astro'
 import Paragraph from './Paragraph.astro'
 import SubTitle from './SubTitle.astro'
@@ -16,7 +16,7 @@ import Title from './Title.astro'
           {p.name}
         </a>
       </SubTitle>
-      <SubTitle>
+      <SubTitle class="flex items-center">
         <a href={p.github} target="_blank" class="print:hidden">
           <Icon name="bi:github" class="ml-1 size-[1.2em] text-black dark:text-white" />
         </a>

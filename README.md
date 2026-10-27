@@ -3,7 +3,7 @@
 Can be viewed publicly at https://cartergrimmeisen.com and https://cartergrimmeisen.github.io/resume
 
 Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com) and [Bun](https://bun.sh).
-Content lives in [`src/data/resume.ts`](src/data/resume.ts).
+Content lives in [`src/data/resume.yaml`](src/data/resume.yaml).
 
 ## Commands
 
