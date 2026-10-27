@@ -139,7 +139,11 @@ describe.each([false, true])('print (dark class set: %p)', (dark) => {
     const px = (x: number, y: number) => [...png.data.slice((y * png.width + x) * 4, (y * png.width + x) * 4 + 3)]
     expect(px(Math.round(png.width * 0.1), Math.round(png.height * 0.04))).toEqual([255, 255, 255])
     // Colours legitimately differ (Chrome darkens text without backgrounds), but nothing may be drawn extra, like the header wave.
-    const { colors: _, ...withBackgroundsShape } = await inspect(withBackgrounds)
+    const withBackgroundsShape = await inspect(withBackgrounds).then(({ pages, lines, paths }) => ({
+      pages,
+      lines,
+      paths,
+    }))
     expect(withBackgroundsShape).toEqual({ pages: 1, lines: actual.lines, paths: actual.paths })
     expect(actual.pages).toBe(1)
     expect(actual.pages).toBe(expected.pages)
