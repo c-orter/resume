@@ -1,6 +1,6 @@
 # My Resume
 
-Can be viewed publicly at https://cartergrimmeisen.com and https://cartergrimmeisen.github.io/resume
+Can be viewed publicly at https://cartergrimmeisen.com
 
 Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com) and [Bun](https://bun.sh).
 Content lives in [`src/data/resume.yaml`](src/data/resume.yaml).
