@@ -5,6 +5,7 @@ import profile from '../assets/profile.jpg'
 import { Image } from 'astro:assets'
 import Button from './Button.astro'
 
+const { full = false } = Astro.props
 const icon = 'flex items-center text-[18px] leading-none'
 ---
 
@@ -22,12 +23,23 @@ const icon = 'flex items-center text-[18px] leading-none'
         <Icon name="bi:github" class={`${icon} dark:text-white`} />
       </Button>
     </div>
+    <Button
+      href={full ? '/' : '/full'}
+      target="_self"
+      aria-label={full ? 'Show short resume' : 'Show full resume'}
+      id="length-toggle"
+      class="ml-auto"
+    >
+      <span class="text-paragraph font-extrabold tracking-[1px] uppercase dark:text-white">
+        {full ? 'Short' : 'Full'}
+      </span>
+    </Button>
   </section>
 
   <div class="box">
     <div class="person-info">
       <h1 class="name text-[2em] leading-none font-extrabold tracking-[3px] uppercase dark:text-gray-200">{name}</h1>
-      <h2 class="position text-subtitle leading-[22px] font-extrabold tracking-[2px] text-blue-500 uppercase dark:text-blue-400">
+      <h2 class="position text-subtitle leading-(--lh) font-extrabold tracking-[2px] text-blue-500 uppercase dark:text-blue-400">
         {title}
       </h2>
     </div>

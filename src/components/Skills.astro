@@ -3,12 +3,13 @@ import { skills } from '../data/resume.yaml'
 import Headline from './Headline.astro'
 import Paragraph from './Paragraph.astro'
 import Title from './Title.astro'
+const { full = false } = Astro.props
 ---
 
 <Title>Skills</Title>
 {skills.map((s) => (
   <div class="mb-3">
     <Headline>{s.category}</Headline>
-    <Paragraph set:html={s.items} />
+    <Paragraph set:html={full && s.full ? `${s.items}, ${s.full}` : s.items} />
   </div>
 ))}

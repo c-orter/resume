@@ -7,9 +7,9 @@ import SubTitle from './SubTitle.astro'
 import Title from './Title.astro'
 ---
 
-<Title>Projects</Title>
+<Title>Open Source</Title>
 {projects.map((p) => (
-  <section class="mb-[1em]">
+  <section class="mb-[1em] print:mb-0">
     <section class="flex items-center justify-between">
       <SubTitle class="hover:text-blue-800 dark:hover:text-blue-300">
         <a href={p.github} target="_blank" class="underline print:no-underline">

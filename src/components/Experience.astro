@@ -1,24 +1,32 @@
 ---
 import { experience } from '../data/resume.yaml'
 import Headline from './Headline.astro'
+import Paragraph from './Paragraph.astro'
 import SubTitle from './SubTitle.astro'
 import Title from './Title.astro'
+const { full = false } = Astro.props
 ---
 
 <Title>Experience</Title>
 {experience.map((job) => (
-  <section class="mb-[2em] last:mb-0">
+  <section class="mb-[2em] break-inside-avoid print:mb-[1em] last:mb-0">
     <section class="flex items-center justify-between">
       <SubTitle class="pr-[45px]">{job.position}</SubTitle>
       <SubTitle class="text-right" set:html={job.period} />
     </section>
 
     <Headline>{job.company}</Headline>
-    <div class="bullets">
-      {job.description.map((bullet) => (
-        <p class="bullet text-paragraph leading-[22px] text-gray-800 dark:text-gray-300" set:html={`+ ${bullet}`} />
-      ))}
-    </div>
+    {job.note && <Paragraph class="italic">{job.note}</Paragraph>}
+    {job.groups.map((group) => (
+      <>
+        {group.heading && <Headline class="mt-[0.5em]">{group.heading}</Headline>}
+        <div class="bullets">
+          {[...group.bullets, ...(full ? (group.full ?? []) : [])].map((bullet) => (
+            <p class="bullet text-paragraph leading-(--lh) text-gray-800 dark:text-gray-300" set:html={`+ ${bullet}`} />
+          ))}
+        </div>
+      </>
+    ))}
   </section>
 ))}
 

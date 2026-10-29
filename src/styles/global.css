@@ -36,6 +36,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --lh: 22px;
+}
+
 .a4 {
   width: 25cm;
 }
@@ -50,9 +54,13 @@ body {
 }
 
 @media print {
+  /* Tighter lines so the one-page version fits on a sheet. */
+  :root {
+    --lh: 18px;
+  }
   .a4 {
     margin: 0 !important;
-    width: 25cm !important;
+    width: 26cm !important;
     box-shadow: none !important;
   }
 }

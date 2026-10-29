@@ -1,28 +1,31 @@
 ---
-import Certifications from './Certifications.astro'
+import Clearance from './Clearance.astro'
 import Contacts from './Contacts.astro'
 import Education from './Education.astro'
 import Experience from './Experience.astro'
 import Header from './Header.astro'
 import Projects from './Projects.astro'
 import Skills from './Skills.astro'
+import Summary from './Summary.astro'
+const { full = false } = Astro.props
 ---
 
 <div class="wrapper">
   <div class="header">
-    <Header />
+    <Header full={full} />
   </div>
   <div class="contacts">
     <Contacts />
   </div>
   <div class="skills">
-    <Skills />
-    <div class="certifications">
-      <Certifications />
+    <Skills full={full} />
+    <div class="clearance">
+      <Clearance />
     </div>
   </div>
   <div class="experience">
-    <Experience />
+    <Summary />
+    <Experience full={full} />
     <div class="projects">
       <Projects />
     </div>
@@ -50,7 +53,7 @@ import Skills from './Skills.astro'
   .education {
     padding: 0 22.5px 0 45px;
   }
-  .certifications {
+  .clearance {
     margin-top: 45px;
   }
   .experience {
@@ -113,6 +116,9 @@ import Skills from './Skills.astro'
     /* The wave is screen-only, even when background graphics are enabled in the print dialog. */
     .header {
       background-image: none !important;
+    }
+    .projects {
+      margin-bottom: 0;
     }
     .wrapper {
       grid-template-rows: auto 200px 200px auto;
