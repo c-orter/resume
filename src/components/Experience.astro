@@ -21,8 +21,17 @@ const { full = false } = Astro.props
       <>
         {group.heading && <Headline class="mt-[0.5em]">{group.heading}</Headline>}
         <div class="bullets">
-          {[...group.bullets, ...(full ? (group.full ?? []) : [])].map((bullet) => (
+          {group.bullets.map((bullet) => (
             <p class="bullet text-paragraph leading-(--lh) text-gray-800 dark:text-gray-300" set:html={`+ ${bullet}`} />
+          ))}
+          {(group.full ?? []).map((bullet) => (
+            <p
+              class:list={[
+                'bullet text-paragraph leading-(--lh) text-gray-800 dark:text-gray-300',
+                !full && 'print:hidden',
+              ]}
+              set:html={`+ ${bullet}`}
+            />
           ))}
         </div>
       </>

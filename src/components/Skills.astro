@@ -10,6 +10,8 @@ const { full = false } = Astro.props
 {skills.map((s) => (
   <div class="mb-3">
     <Headline>{s.category}</Headline>
-    <Paragraph set:html={full && s.full ? `${s.items}, ${s.full}` : s.items} />
+    <Paragraph
+      set:html={s.full ? `${s.items}<span class="${full ? '' : 'print:hidden'}">, ${s.full}</span>` : s.items}
+    />
   </div>
 ))}

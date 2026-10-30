@@ -3,7 +3,7 @@
 Can be viewed publicly at https://cartergrimmeisen.com
 
 Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com) and [Bun](https://bun.sh).
-Content lives in [`src/data/resume.yaml`](src/data/resume.yaml). `/` is the one-page resume; `/full` is the two-page version, which adds every `full:` entry (extra bullets and skills) from the YAML.
+Content lives in [`src/data/resume.yaml`](src/data/resume.yaml). `/` shows everything on screen and prints as the one-page resume, hiding every `full:` entry (extra bullets and skills) from the YAML; `/full` shows and prints all of it as the two-page version.
 
 ## Commands
 

@@ -19,21 +19,20 @@ const icon = 'flex items-center text-[18px] leading-none'
         <Icon name="bi:sun-fill" class={`${icon} hidden text-white dark:flex`} />
         <Icon name="bi:moon-fill" class={`${icon} dark:hidden`} />
       </Button>
-      <Button href="https://github.com/CarterGrimmeisen/resume" aria-label="Source on GitHub">
+      <Button href="https://github.com/c-orter/resume" aria-label="Source on GitHub">
         <Icon name="bi:github" class={`${icon} dark:text-white`} />
       </Button>
     </div>
-    <Button
+    <a
       href={full ? '/' : '/full'}
       target="_self"
-      aria-label={full ? 'Show short resume' : 'Show full resume'}
+      aria-label={full ? 'Print the short version' : 'Print the full version'}
       id="length-toggle"
-      class="ml-auto"
+      class="ml-auto mr-2.5 text-paragraph tracking-[1px] text-gray-600 uppercase hover:text-black dark:text-gray-400 dark:hover:text-white"
     >
-      <span class="text-paragraph font-extrabold tracking-[1px] uppercase dark:text-white">
-        {full ? 'Short' : 'Full'}
-      </span>
-    </Button>
+      Print: <span class:list={[!full && 'font-extrabold']}>Short</span> /{' '}
+      <span class:list={[full && 'font-extrabold']}>Full</span>
+    </a>
   </section>
 
   <div class="box">
@@ -114,7 +113,7 @@ const icon = 'flex items-center text-[18px] leading-none'
   }
   @media print {
     .box {
-      padding-top: 0;
+      padding-top: 20px;
     }
   }
 </style>
