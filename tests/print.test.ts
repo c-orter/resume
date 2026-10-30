@@ -117,57 +117,15 @@ describe.each(VERSIONS.flatMap((v) => [false, true].map((dark) => ({ ...v, dark 
   ({ name, path, pages, reference, dark }) => {
     const tag = `${name}-${dark ? 'dark' : 'light'}`
 
-  test('hides screen-only chrome and shows print-only content', async () => {
-    const page = await open({ dark, media: 'print' })
-    expect(await page.locator('.header').evaluate((el) => getComputedStyle(el).backgroundImage)).toBe('none')
-    expect(await visible(page, '.toolbar')).toBe(false)
-    expect(await visible(page, 'img')).toBe(false)
-    expect(await visible(page, 'a[href="https://cartergrimmeisen.com"]')).toBe(true)
-    expect(await visible(page, 'text=https://www.npmjs.com/package/zod-prisma')).toBe(true)
-    expect(await visible(page, 'a[href$="/zod-prisma"] svg')).toBe(false)
-    await page.close()
-  })
-
-  test('is always light, whatever the theme', async () => {
-    const page = await open({ dark, media: 'print' })
-    expect(await luminance(page, 'h1')).toBeLessThan(0.3)
-    expect(await luminance(page, 'p')).toBeLessThan(0.4)
-    const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
-    expect(bg).toBe('rgba(0, 0, 0, 0)')
-    await page.close()
-  })
-
-  test('prints like the reference PDF, with background graphics on or off', async () => {
-    const page = await open({ dark, media: 'print' })
-    const pdf = await page.pdf(PRINT_OPTIONS)
-    const withBackgrounds = await page.pdf({ ...PRINT_OPTIONS, printBackground: true })
-    writeFileSync(`${OUT}/print-${tag}.pdf`, pdf)
-    await page.close()
-
-    if (process.env.UPDATE_PRINT_REFERENCE && !dark) writeFileSync(REFERENCE, pdf)
-    const [actual, expected] = await Promise.all([inspect(pdf), inspect(await Bun.file(REFERENCE).bytes())])
-
-    // The header wave must not show, even with background graphics on: sample the area behind the name.
-    const raster = Bun.spawnSync(['pdftoppm', '-png', '-r', '20', '-singlefile'], { stdin: withBackgrounds })
-    const png = PNG.sync.read(Buffer.from(raster.stdout))
-    const px = (x: number, y: number) => [...png.data.slice((y * png.width + x) * 4, (y * png.width + x) * 4 + 3)]
-    expect(px(Math.round(png.width * 0.1), Math.round(png.height * 0.04))).toEqual([255, 255, 255])
-    // Colours legitimately differ (Chrome darkens text without backgrounds), but nothing may be drawn extra, like the header wave.
-    const withBackgroundsShape = await inspect(withBackgrounds).then(({ pages, lines, paths }) => ({
-      pages,
-      lines,
-      paths,
-    }))
-    expect(withBackgroundsShape).toEqual({ pages: 1, lines: actual.lines, paths: actual.paths })
-    expect(actual.pages).toBe(1)
-    expect(actual.pages).toBe(expected.pages)
-    // Icons and bullets: a missing icon, or a bullet drawn as a CSS background, changes this.
-    expect(actual.paths).toBe(expected.paths)
-    expect(actual.colors).toEqual(expected.colors)
-    expect(actual.lines.map((l) => l.text)).toEqual(expected.lines.map((l) => l.text))
-    actual.lines.forEach((line, i) => {
-      expect(Math.abs(line.x - expected.lines[i].x)).toBeLessThan(TOLERANCE_PT)
-      expect(Math.abs(line.y - expected.lines[i].y)).toBeLessThan(TOLERANCE_PT)
+    test('hides screen-only chrome and shows print-only content', async () => {
+      const page = await open({ dark, media: 'print', path })
+      expect(await page.locator('.header').evaluate((el) => getComputedStyle(el).backgroundImage)).toBe('none')
+      expect(await visible(page, '.toolbar')).toBe(false)
+      expect(await visible(page, 'img')).toBe(false)
+      expect(await visible(page, 'a[href="https://cartergrimmeisen.com"]')).toBe(true)
+      expect(await visible(page, 'text=https://www.npmjs.com/package/zod-prisma')).toBe(true)
+      expect(await visible(page, 'a[href$="/zod-prisma"] svg')).toBe(false)
+      await page.close()
     })
 
     test('is always light, whatever the theme', async () => {
@@ -192,7 +150,7 @@ describe.each(VERSIONS.flatMap((v) => [false, true].map((dark) => ({ ...v, dark 
       // The header wave must not show, even with background graphics on: sample the area behind the name.
       const raster = Bun.spawnSync(['pdftoppm', '-png', '-r', '20', '-singlefile'], { stdin: withBackgrounds })
       const png = PNG.sync.read(Buffer.from(raster.stdout))
-      const px = (x: number, y: number) => [...png.data.slice((y * png.width + x) * 4, (y * png.width + x) * 4 + 3)]
+      const px = (x: number, y: number) => [...png.data.subarray((y * png.width + x) * 4, (y * png.width + x) * 4 + 3)]
       expect(px(Math.round(png.width * 0.1), Math.round(png.height * 0.04))).toEqual([255, 255, 255])
       // Colours legitimately differ (Chrome darkens text without backgrounds), but nothing may be drawn extra, like the header wave.
       const withBackgroundsShape = await inspect(withBackgrounds).then(({ pages, lines, paths }) => ({
@@ -234,6 +192,15 @@ describe('screen', () => {
     await page.waitForURL('**/full')
     await page.click('#length-toggle')
     await page.waitForURL(`${BASE}/`)
+    await page.close()
+  })
+
+  test('the short page shows every entry on screen and hides the extras when printing', async () => {
+    const page = await open({ dark: false, media: 'screen' })
+    const all = await page.locator('p.bullet').count()
+    expect(await page.locator('p.bullet:visible').count()).toBe(all)
+    await page.emulateMedia({ media: 'print' })
+    expect(await page.locator('p.bullet:visible').count()).toBeLessThan(all)
     await page.close()
   })
 
