@@ -1,12 +1,12 @@
 ---
 import Clearance from './Clearance.astro'
+import Certifications from './Certifications.astro'
 import Contacts from './Contacts.astro'
 import Education from './Education.astro'
 import Experience from './Experience.astro'
 import Header from './Header.astro'
 import Projects from './Projects.astro'
 import Skills from './Skills.astro'
-import Summary from './Summary.astro'
 const { full = false } = Astro.props
 ---
 
@@ -19,12 +19,14 @@ const { full = false } = Astro.props
   </div>
   <div class="skills">
     <Skills full={full} />
+    <div class="certifications">
+      <Certifications />
+    </div>
     <div class="clearance">
       <Clearance />
     </div>
   </div>
   <div class="experience">
-    <Summary />
     <Experience full={full} />
     <div class="projects">
       <Projects />
@@ -52,6 +54,9 @@ const { full = false } = Astro.props
   .skills,
   .education {
     padding: 0 22.5px 0 45px;
+  }
+  .certifications {
+    margin-top: 30px;
   }
   .clearance {
     margin-top: 45px;

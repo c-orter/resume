@@ -3,6 +3,7 @@ certifications:
   - LPIC-1 Linux Administrator
   - Security+
   - Network+
+clearance: Active DoD Secret clearance
 contacts:
   - icon: bi:telephone-fill
     label: (860) 726-6992
@@ -11,8 +12,8 @@ contacts:
     label: cpgrimmeisen@gmail.com
     href: mailto:cpgrimmeisen@gmail.com
   - icon: bi:github
-    label: CarterGrimmeisen
-    href: https://github.com/CarterGrimmeisen
+    label: c-orter
+    href: https://github.com/c-orter
     external: true
   - icon: bi:linkedin
     label: carter-grimmeisen
@@ -24,52 +25,78 @@ contacts:
     external: true
     printOnly: true
 education:
-  - completed: In progress
+  - completed: Expected 2027
     degree: MS Computer Science
-    institution: University of Alabama Huntsville
+    institution: University of Alabama in Huntsville
     gpa: '4.0'
   - completed: May 2022
     degree: BS Computer Science
-    institution: University of Alabama Huntsville
+    institution: University of Alabama in Huntsville
     gpa: '4.0'
 experience:
-  - position: Software Engineer II
-    period: June&nbsp;2022 - Present
+  - position: Principal Software Engineer
+    period: May&nbsp;2026 - Present
+    company: Technical Consulting Solutions
+    note: Subcontractor to Northrop Grumman
+    groups:
+      - bullets:
+          - 'Develop software for a large, fielded Ada codebase as part of a 10-12 person team'
+          - 'Built a web-based log analysis tool that processes run logs as they arrive on the log server, giving developers and testers visibility into system behavior and exposing a class of slowdowns behind timeouts and failures'
+          - Own vulnerability scanning and metrics reporting for the codebase
+  - position: Lead Software Engineer
+    period: June&nbsp;2022 - May&nbsp;2026
     company: CFD Research Corp.
-    description:
-      - 'Directed development of Android/iOS application visualizing blast overpressure exposure for service members, delivering custom 2D and 3D scenario visualizations <strong>(React&nbsp;Native,&nbsp;TypeScript,&nbsp;VTK.js)</strong>'
-      - 'Orchestrated licensing, compilation, and packaging workflows to streamline deployment of internal Python applications and libraries <strong>(Python,&nbsp;Docker)</strong>'
-      - 'Led cross-functional team to commercialize academic space-weather simulation toolkit, transitioning research into production-ready software <strong>(Docker,&nbsp;Python)</strong>'
-      - 'Built and deployed web-based dashboard to manage and execute alloy modeling simulations, improving accessibility and usability <strong>(Python,&nbsp;TypeScript,&nbsp;SQL)</strong>'
-      - 'Engineered real-time, web-based event dashboard for monitoring and configuring a software-defined firewall <strong>(SvelteKit,&nbsp;JavaScript,&nbsp;SQL)</strong>'
-      - 'Optimized model training workflows by implementing custom SQLite-backed PyTorch dataloader, accelerating research throughput <strong>(Python,&nbsp;SQL)</strong>'
-  - position: Software Engineer - Intern
+    groups:
+      - heading: Leadership
+        bullets:
+          - 'Led a 3-person team within an 8-10 person engineering group; conducted performance reviews, mentored engineers, interviewed candidates, and matched staff to projects'
+          - 'Served as technical lead on greenfield SBIR projects ($800K-$6M) for scientific customers, owning requirements, planning, delivery, and customer reviews across mobile, web, ML, and DevOps work'
+          - 'Authored the technical approach (architecture, design, implementation plan) for ~6 proposals and presented it in customer Q&A; 3 won outright and 1 advanced as a joint effort, and the resulting expertise supported a separate ~$10M award'
+          - 'Managed customer scope and expectations by negotiating phased delivery, proposing alternatives when approaches fell short, and communicating revised timelines when schedules slipped'
+      - heading: Delivery
+        bullets:
+          - 'Reduced ML training time from ~8 hours to under 30 minutes (20x throughput) by moving a 200K-sample dataset into SQLite/DuckDB and implementing a custom PyTorch dataloader'
+          - 'Designed and built a web-based simulation platform for ~12 scientists, replacing manual script-and-CSV workflows with run configuration, job monitoring, and results visualization (Postgres job queue, custom scheduler, role-based access control); automated CI/CD so scientists could release code and configuration updates independently'
+          - 'Led development of an offline-first React Native mobile app with cloud sync and 2D/3D visualization (VTK.js) for blast overpressure exposure, used by soldiers and trainers across dozens of devices'
+        full:
+          - 'Led a cross-functional team of scientists and developers to parallelize, package, and document a space-weather simulation toolkit for HPC deployment'
+          - Developed the real-time monitoring and configuration web UI (SvelteKit) for a spin-out company&rsquo;s software-defined firewall product
+          - 'Built a Python application packager and custom Python distribution builder to streamline licensing, compilation, and deployment of internal applications and libraries (Python, Docker)'
+          - Delivered 3D visualization and web scraping projects for scientist teams
+          - 'Developed agentic coding workflows (reusable skills, coding standards, setup documentation) and deployed self-hosted open models for cost-sensitive and air-gapped environments'
+  - position: 'Software Engineer, Intern'
     period: May&nbsp;2020 - May&nbsp;2022
     company: Northrop Grumman
-    description:
-      - 'Created Ada mocking framework to enable unit testing within legacy codebase, improving test coverage and maintainability <strong>(Ada)</strong>'
-      - 'Automated and documented end-to-end metrics reporting workflow, enhancing reliability and reducing manual effort <strong>(Bash,&nbsp;Python)</strong>'
-      - 'Earned employee recognition award for developing automation that streamlined complex email review process, saving hundreds of engineering hours weekly <strong>(PowerShell)</strong>'
+    groups:
+      - bullets:
+          - 'Automated an ~18-hour biweekly vulnerability-scan and metrics reporting process, eliminating recurring engineering effort'
+          - 'Developed an Ada mocking framework to enable unit testing of a legacy codebase on a 7-8 person DevOps team'
+        full:
+          - Maintained build and CI/CD pipelines for the team
   - position: Software Developer
     period: March&nbsp;2017 - May&nbsp;2020
     company: 'Avilution, LLC.'
-    description:
-      - 'Implemented cryptographic signing for flight-critical configurations, enhancing security and integrity of avionics systems <strong>(C,&nbsp;ECDSA)</strong>'
-      - 'Contributed to core avionics software development, improving reliability and performance of flight systems <strong>(C)</strong>'
-      - 'Built web-based application for aircraft management, enabling efficient data handling and operational oversight <strong>(MongoDB,&nbsp;TypeScript,&nbsp;Vue.js)</strong>'
-      - 'Designed and delivered desktop application for managing display layouts and graphics, streamlining user workflows <strong>(TypeScript,&nbsp;Node.js,&nbsp;Electron,&nbsp;Vue.js)</strong>'
+    groups:
+      - bullets:
+          - 'Owned architecture, deployment, and support as one of two engineers at an early-stage avionics startup'
+          - 'Built a drag-and-drop display designer (Electron, Vue.js, TypeScript) with dozens of configurable widgets and aircraft configuration management, a key product selling point'
+          - Implemented ECDSA signing for flight-critical configurations and contributed to core avionics software in C
+        full:
+          - Developed low-level hardware drivers and a custom embedded Yocto build for an avionics-as-software platform
 name: Carter Grimmeisen
 projects:
-  - name: Zod Prisma
+  - name: zod-prisma
     technologies: 'TypeScript, Prisma, Zod'
-    description: Generates Zod schemas for database models defined in your Prisma schema in order to validate user input. Over <strong>1.5 million downloads</strong> on NPM and nearly <strong>900 stars</strong> on GitHub.
+    description: 'Open-source library that generates Zod validation schemas from Prisma data models. <strong>900+ GitHub stars</strong>, <strong>2.3M lifetime downloads</strong>.'
     github: https://github.com/CarterGrimmeisen/zod-prisma
     npm: https://www.npmjs.com/package/zod-prisma
 skills:
-  - category: Programming Languages
-    items: 'Python, TypeScript, Bash, Rust, Java/Kotlin, C/C++, C#, Ada, HTML/CSS/JS'
-  - category: Frameworks and Runtimes
-    items: 'Node.js, Express.js, Flask, Plotly&nbsp;Dash, MPI, React, React Native, Vue.js, Svelte, Electron, Flutter'
-  - category: Development Tools
-    items: 'Git, GitLab, GitHub, Docker, Docker&nbsp;Compose, CI/CD, PostgreSQL, SQLite, MongoDB, Conda, Cython'
+  - category: Languages
+    items: 'Python, TypeScript, Ada, Rust, C++, Bash'
+    full: 'Java, C#, Kotlin, C, HTML/CSS/JS'
+  - category: Frameworks and Tools
+    items: 'React Native, Flutter, Vue.js, SvelteKit, Node.js, PyTorch, PostgreSQL, SQLite/DuckDB, Docker, CI/CD, Git'
+    full: 'Express.js, Flask, Plotly Dash, MPI, React, Svelte, Electron, GitLab, GitHub, Docker Compose, MongoDB, Conda, Cython'
+  - category: AI-Assisted Development
+    items: 'Claude Code, GitHub Copilot, Cursor, agent skills and workflows, self-hosted open models'
 title: Software Engineer

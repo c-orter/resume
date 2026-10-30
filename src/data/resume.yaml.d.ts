@@ -2,12 +2,25 @@
 declare const contents: {
   name: string
   title: string
+  certifications: string[]
+  clearance: string
   contacts: { icon: string; label: string; href: string; external?: boolean; printOnly?: boolean }[]
   education: { completed: string; degree: string; institution: string; gpa: string }[]
-  experience: { position: string; period: string; company: string; description: string[] }[]
-  projects: { name: string; technologies: string; description: string; github: string; npm: string }[]
-  certifications: string[]
-  skills: { category: string; items: string }[]
+  experience: {
+    position: string
+    period: string
+    company: string
+    note?: string
+    groups: { heading?: string; bullets: string[]; full?: string[] }[]
+  }[]
+  projects: {
+    name: string
+    technologies: string
+    description: string
+    github: string
+    npm: string
+  }[]
+  skills: { category: string; items: string; full?: string }[]
 }
 
 export = contents
