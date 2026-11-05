@@ -12,9 +12,35 @@ const icon = 'flex items-center text-[18px] leading-none'
 <div class="w-full">
   <section class="toolbar mb-[-62px] flex items-center print:hidden">
     <div class="flex">
-      <Button id="print-button" aria-label="Print">
-        <Icon name="bi:printer-fill" class={`${icon} dark:text-white`} />
-      </Button>
+      <div class="relative">
+        <Button id="print-button" aria-label="Print" aria-haspopup="menu" aria-expanded="false" aria-controls="print-menu">
+          <Icon name="bi:printer-fill" class={`${icon} dark:text-white`} />
+        </Button>
+        <div
+          id="print-menu"
+          role="menu"
+          hidden
+          class="absolute top-full left-2.5 z-10 min-w-60 overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"
+        >
+          {
+            [
+              { href: '/', label: 'Print short version' },
+              { href: '/full', label: 'Print full version' },
+            ].map(({ href, label }) => (
+              <a
+                href={`${href}?print`}
+                data-path={href}
+                role="menuitem"
+                target="_self"
+                class="block px-4 py-3 text-paragraph whitespace-nowrap text-black hover:bg-black/10 dark:text-white dark:hover:bg-white/10"
+              >
+                {label}
+                {(href === '/full') === full && <span class="ml-1.5 text-xs text-gray-500 dark:text-gray-400">current</span>}
+              </a>
+            ))
+          }
+        </div>
+      </div>
       <Button id="theme-button" aria-label="Toggle dark mode">
         <Icon name="bi:sun-fill" class={`${icon} hidden text-white dark:flex`} />
         <Icon name="bi:moon-fill" class={`${icon} dark:hidden`} />
@@ -23,16 +49,6 @@ const icon = 'flex items-center text-[18px] leading-none'
         <Icon name="bi:github" class={`${icon} dark:text-white`} />
       </Button>
     </div>
-    <a
-      href={full ? '/' : '/full'}
-      target="_self"
-      aria-label={full ? 'Print the short version' : 'Print the full version'}
-      id="length-toggle"
-      class="ml-auto mr-2.5 text-paragraph tracking-[1px] text-gray-600 uppercase hover:text-black dark:text-gray-400 dark:hover:text-white"
-    >
-      Print: <span class:list={[!full && 'font-extrabold']}>Short</span> /{' '}
-      <span class:list={[full && 'font-extrabold']}>Full</span>
-    </a>
   </section>
 
   <div class="box">
@@ -49,7 +65,33 @@ const icon = 'flex items-center text-[18px] leading-none'
 </div>
 
 <script>
-  document.getElementById('print-button')?.addEventListener('click', () => window.print())
+  const printButton = document.getElementById('print-button')
+  const menu = document.getElementById('print-menu')
+  const setMenu = (open: boolean) => {
+    if (menu) menu.hidden = !open
+    printButton?.setAttribute('aria-expanded', String(open))
+  }
+  printButton?.addEventListener('click', (e) => {
+    e.stopPropagation()
+    setMenu(!!menu?.hidden)
+  })
+  document.addEventListener('click', () => setMenu(false))
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false)
+  })
+  menu?.querySelectorAll<HTMLAnchorElement>('a').forEach((a) =>
+    a.addEventListener('click', (e) => {
+      if (a.dataset.path !== location.pathname.replace(/(.)\/$/, '$1')) return
+      e.preventDefault()
+      setMenu(false)
+      window.print()
+    }),
+  )
+  // Arrived from the other version's menu: open the print dialog once.
+  if (new URLSearchParams(location.search).has('print')) {
+    history.replaceState(null, '', location.pathname)
+    window.print()
+  }
   document.getElementById('theme-button')?.addEventListener('click', () => {
     const dark = document.documentElement.classList.toggle('dark')
     try {
@@ -82,12 +124,7 @@ const icon = 'flex items-center text-[18px] leading-none'
 
   @media (max-width: 12.9cm) {
     .toolbar {
-      align-items: flex-start;
-      margin-bottom: -185px;
-    }
-
-    .toolbar > div {
-      flex-direction: column;
+      margin-bottom: 0;
     }
   }
 

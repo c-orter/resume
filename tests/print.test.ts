@@ -186,12 +186,17 @@ describe('screen', () => {
     await page.close()
   })
 
-  test('length toggle switches between the short and full versions', async () => {
+  test('print menu offers both versions and prints from the other one', async () => {
     const page = await open({ dark: false, media: 'screen' })
-    await page.click('#length-toggle')
+    expect(await page.locator('#print-menu').isVisible()).toBe(false)
+    await page.click('#print-button')
+    expect(await page.locator('#print-menu').isVisible()).toBe(true)
+    await page.keyboard.press('Escape')
+    expect(await page.locator('#print-menu').isVisible()).toBe(false)
+    await page.click('#print-button')
+    await page.click('#print-menu a[data-path="/full"]')
     await page.waitForURL('**/full')
-    await page.click('#length-toggle')
-    await page.waitForURL(`${BASE}/`)
+    expect(page.url()).not.toContain('print')
     await page.close()
   })
 
@@ -204,13 +209,14 @@ describe('screen', () => {
     await page.close()
   })
 
-  test('print button opens the print dialog', async () => {
+  test('print menu opens the print dialog for the current version', async () => {
     const page = await open({ dark: false, media: 'screen' })
     await page.evaluate(() => {
       ;(window as unknown as PrintSpy).__printed = 0
       window.print = () => void (window as unknown as PrintSpy).__printed++
     })
     await page.click('#print-button')
+    await page.click('#print-menu a[data-path="/"]')
     expect(await page.evaluate(() => (window as unknown as PrintSpy).__printed)).toBe(1)
     await page.close()
   })
